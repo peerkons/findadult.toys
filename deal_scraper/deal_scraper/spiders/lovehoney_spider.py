@@ -8,10 +8,13 @@ class LovehoneySpider(scrapy.Spider):
         for deal in response.css('div.product-card'):
             title = deal.css('span.product-tile-name::text').get().strip()
 
-            # Print the title to ensure it's being scraped correctly
-            self.log(f'Title found: {title}')
+            # Clean the product name by stripping whitespace
+            clean_title = title.strip()
+
+            # Log the cleaned title to verify
+            self.log(f'Title found: {clean_title}')
 
             yield {
-                'title': title,
+                'title': clean_title,
                 # Additional fields will be added here later
             }
